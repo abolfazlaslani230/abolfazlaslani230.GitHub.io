@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پورتفولیو ابوالفضل</title>
-    
-    <!-- لود فونت تمیز فارسی از گوگل -->
+    <title>ابوالفضل | ترمینال امنیتی</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap">
-
     <style>
         * {
             box-sizing: border-box;
@@ -17,122 +14,223 @@
 
         body {
             background-color: #050505;
-            color: #00ff00;
-            font-family: 'Vazirmatn', sans-serif;
+            color: #00ff66;
+            font-family: 'Vazirmatn', monospace, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding-bottom: 20px;
         }
 
-        /* نوار منو */
+        /* نوار بالای سایت */
         nav {
             width: 100%;
             background-color: #0d0d0d;
-            border-bottom: 2px solid #00ff00;
-            padding: 14px 0;
+            border-bottom: 2px solid #00ff66;
+            padding: 12px 0;
             position: sticky;
             top: 0;
+            z-index: 10;
         }
 
         .nav-links {
-            max-width: 600px;
-            margin: 0 auto;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 0 10px;
         }
 
-        .nav-links a {
-            color: #00ff00;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
+        .nav-btn {
+            background: transparent;
+            color: #00ff66;
+            border: 1px solid #00ff66;
+            border-radius: 6px;
             padding: 6px 14px;
-            border: 1px solid #00ff00;
-            border-radius: 6px;
-        }
-
-        .nav-links a:hover {
-            background-color: #00ff00;
-            color: #000000;
-        }
-
-        /* کادر اصلی */
-        .card {
-            width: 90%;
-            max-width: 450px;
-            margin-top: 35px;
-            padding: 25px;
-            background-color: #0c0c0c;
-            border: 2px solid #00ff00;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .info-row {
-            margin: 10px 0;
-            font-size: 15px;
-            color: #c9ffc9;
-        }
-
-        .separator {
-            border: none;
-            border-top: 1px dashed #00ff00;
-            margin: 20px 0;
-        }
-
-        button {
-            background-color: transparent;
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            border-radius: 6px;
-            padding: 10px 24px;
-            font-size: 15px;
             font-family: inherit;
-            font-weight: 700;
+            font-size: 13px;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
         }
 
-        button:active {
-            background-color: #00ff00;
-            color: #000000;
+        .nav-btn:active {
+            background: #00ff66;
+            color: #000;
+        }
+
+        /* پنجره شبیه‌ساز ترمینال */
+        .terminal-window {
+            width: 92%;
+            max-width: 550px;
+            margin-top: 25px;
+            background-color: #0c0c0c;
+            border: 2px solid #00ff66;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.25);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background-color: #161616;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #222;
+            direction: ltr;
+        }
+
+        .circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 18px;
+            min-height: 280px;
+            max-height: 400px;
+            overflow-y: auto;
+            text-align: right;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+        }
+
+        .cmd-text {
+            color: #fff;
+            direction: ltr;
+            text-align: left;
+            display: block;
+        }
+
+        /* بخش ورودی دستور */
+        .input-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #111;
+            border-top: 1px solid #00ff66;
+            gap: 8px;
+        }
+
+        .prompt {
+            color: #00ff66;
+            font-weight: bold;
+            direction: ltr;
+        }
+
+        input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-family: inherit;
+            font-size: 15px;
+            direction: ltr;
+        }
+
+        .send-btn {
+            background: #00ff66;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 12px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: inherit;
         }
     </style>
 </head>
 <body>
 
-    <!-- بخش منو -->
+    <!-- دکمه‌های ناوبری سریع -->
     <nav>
         <div class="nav-links">
-            <a href="#home">خانه</a>
-            <a href="#skills">مهارت‌ها</a>
-            <a href="#projects">پروژه‌ها</a>
-            <a href="#contact">تماس</a>
+            <button class="nav-btn" onclick="runCmd('about')">درباره من</button>
+            <button class="nav-btn" onclick="runCmd('skills')">مهارت‌ها</button>
+            <button class="nav-btn" onclick="runCmd('scan')">اسکن امنیتی</button>
+            <button class="nav-btn" onclick="runCmd('clear')">پاکسازی</button>
         </div>
     </nav>
 
-    <!-- کادر مشخصات -->
-    <div class="card" id="home">
-        <h1>> وضعیت سیستم: آنلاین</h1>
-        
-        <div class="info-row"><strong>نام کاربر:</strong> ابوالفضل</div>
-        <div class="info-row"><strong>تخصص:</strong> پایتون و امنیت شبکه</div>
-        <div class="info-row"><strong>سطح دسترسی:</strong> ادمین اصلی</div>
+    <!-- ترمینال شبیه‌ساز -->
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+            <span style="color:#777; font-size: 12px; margin-left: 5px;">bash — root@abolfazl:~</span>
+        </div>
 
-        <hr class="separator">
+        <div class="terminal-body" id="console">
+            <div class="log-entry">> در حال اتصال به هسته امنیتی...</div>
+            <div class="log-entry">> سیستم فعال شد. اپراتور: ابوالفضل</div>
+            <div class="log-entry" style="color: #88ff88;">> راهنما: برای مشاهده دستورات، کلمه <b>help</b> را بنویسید یا دکمه‌های بالا را لمس کنید.</div>
+        </div>
 
-        <button onclick="alert('اسکن امنیتی با موفقیت انجام شد.')">
-            اجرای اسکن
-        </button>
+        <div class="input-bar">
+            <span class="prompt">root@os:~#</span>
+            <input type="text" id="userInput" placeholder="help, skills, scan..." autocomplete="off">
+            <button class="send-btn" onclick="handleInput()">ارسال</button>
+        </div>
     </div>
+
+    <script>
+        const consoleBox = document.getElementById('console');
+        const inputField = document.getElementById('userInput');
+
+        inputField.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                handleInput();
+            }
+        });
+
+        function handleInput() {
+            const cmd = inputField.value.trim().toLowerCase();
+            if (cmd) {
+                runCmd(cmd);
+                inputField.value = '';
+            }
+        }
+
+        function runCmd(command) {
+            printLog('<span class="cmd-text">> ' + command + '</span>');
+
+            if (command === 'help') {
+                printLog('دستورات مجاز:<br>- <b>about</b>: درباره من<br>- <b>skills</b>: لیست مهارت‌ها<br>- <b>scan</b>: اسکن پورت و سرور<br>- <b>clear</b>: پاکسازی ترمینال');
+            } else if (command === 'about') {
+                printLog('نام: ابوالفضل<br>علاقه‌مندی: برنامه‌نویسی پایتون و امنیت سایبری<br>سطح دسترسی: ادمین کل سیستم');
+            } else if (command === 'skills') {
+                printLog('مهارت‌ها:<br>• Python Scripting [████████░░] 80%<br>• Network Security [██████░░░░] 60%<br>• Linux Shell [███████░░░] 70%');
+            } else if (command === 'scan') {
+                printLog('در حال اسکن پورت‌ها...<br>Port 80: Secure<br>Port 443: Encrypted<br>نتیجه: وضعیت ۱۰۰٪ ایمن است.');
+            } else if (command === 'clear') {
+                consoleBox.innerHTML = '';
+            } else {
+                printLog('<span style="color: #ff5555;">خطا: دستور یافت نشد. بنویسید: help</span>');
+            }
+
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+
+        function printLog(text) {
+            const div = document.createElement('div');
+            div.className = 'log-entry';
+            div.innerHTML = text;
+            consoleBox.appendChild(div);
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+    </script>
 
 </body>
 </html>
