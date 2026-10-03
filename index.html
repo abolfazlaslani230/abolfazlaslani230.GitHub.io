@@ -1,52 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>System Access</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abolfazl | Terminal Interface</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            background-color: black;
+            background-color: #050505;
             color: #00ff00;
             font-family: 'Courier New', Courier, monospace;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
-            margin: 0;
         }
-        .card {
+
+        /* استایل منوی ناوبری */
+        nav {
+            width: 100%;
+            background-color: #0d0d0d;
+            border-bottom: 2px solid #00ff00;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-link {
+            color: #00ff00;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 6px 14px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
             border: 1px solid #00ff00;
-            padding: 20px;
-            text-align: center;
-            width: 80%;
-            max-width: 400px;
+            background-color: rgba(0, 255, 0, 0.15);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
         }
+
+        /* کارت اصلی محتوا */
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 30px auto;
+            border: 1px solid #00ff00;
+            border-radius: 6px;
+            background-color: #0a0a0a;
+            padding: 25px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 8px #00ff00;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 8px 0;
+            color: #aaffaa;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px dashed #00ff00;
+            margin: 20px 0;
+        }
+
         button {
-            background: black;
+            background-color: transparent;
             color: #00ff00;
             border: 1px solid #00ff00;
-            padding: 10px;
-            cursor: pointer;
-            margin-top: 15px;
+            padding: 10px 20px;
             font-family: inherit;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 15px;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #00ff00;
+            color: #000;
+            box-shadow: 0 0 12px #00ff00;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>> System Online</h1>
-        <p>User: Abolfazl</p>
-        <p>Status: Python Developer & Cybersecurity Student</p>
-        <p>Access: Granted</p>
 
-        <hr style="border: 0; border-top: 1px solid #00ff00; margin: 20px 0;">
+    <!-- منوی سایت -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="nav-link active">[ Home ]</a>
+            <a href="#skills" class="nav-link">[ Skills ]</a>
+            <a href="#projects" class="nav-link">[ Projects ]</a>
+            <a href="#contact" class="nav-link">[ Contact ]</a>
+        </div>
+    </nav>
 
-        <h3>> System Information</h3>
-        <p>Role: Cybersecurity Student</p>
-        <p>Language: Python / HTML / CSS</p>
+    <!-- کارت وضعیت و مشخصات -->
+    <div class="container" id="home">
+        <h1>> SYSTEM ONLINE</h1>
+        <p><strong>Operator:</strong> Abolfazl</p>
+        <p><strong>Focus:</strong> Python Development & Cybersecurity</p>
+        <p><strong>Access Level:</strong> Root Administrator</p>
 
-        <button onclick="alert('Accessing Secure Database...')">
+        <hr>
+
+        <h3 style="margin-bottom: 10px;">> System Diagnostics</h3>
+        <p>Core: Python 3.x</p>
+        <p>Protocol: Secure / HTTPS</p>
+        <p>Status: All Systems Operational</p>
+
+        <button onclick="alert('Scanning network... Status: 100% Secure')">
             INITIATE SCAN
         </button>
     </div>
+
 </body>
 </html>
