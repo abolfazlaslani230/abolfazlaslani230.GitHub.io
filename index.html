@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ابوالفضل اصلانی | پایتون و امنیت سایبری</title>
+    <title>ابوالفضل اصلانی | برنامه‌نویس پایتون و امنیت سایبری</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,26 +13,43 @@
         }
 
         body {
-            background-color: #080c14;
+            background-color: #070b12;
             color: #e2e8f0;
             min-height: 100vh;
-            padding: 20px 14px 60px;
+            padding: 24px 14px 70px;
             display: flex;
             justify-content: center;
         }
 
         .container {
             width: 100%;
-            max-width: 580px;
+            max-width: 600px;
         }
 
+        /* استایل عمومی کارت‌ها */
         .card {
             background: #0f172a;
             border: 1px solid #1e293b;
             border-radius: 16px;
             padding: 22px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ۱. بخش پروفایل */
+        .profile-card {
+            text-align: center;
+            position: relative;
         }
 
         .badge {
@@ -70,7 +87,6 @@
             font-family: monospace;
             margin-bottom: 12px;
             direction: ltr;
-            text-align: right;
         }
 
         .bio {
@@ -79,22 +95,145 @@
             line-height: 1.8;
         }
 
-        .card-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #f1f5f9;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        /* ۲. ترمینال تعاملی */
+        .terminal {
+            background: #030712;
+            border: 1px solid #10b981;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
         }
 
-        /* دکمه‌های پیام‌رسان‌ها و ارتباط مستقیم */
+        .terminal-header {
+            background: #111827;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid #1f2937;
+            direction: ltr;
+        }
+
+        .t-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .t-red { background: #ef4444; }
+        .t-yellow { background: #f59e0b; }
+        .t-green { background: #10b981; }
+
+        .terminal-body {
+            padding: 14px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            color: #10b981;
+            direction: ltr;
+            text-align: left;
+            min-height: 120px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .terminal-input-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #030712;
+            border-top: 1px solid #1f2937;
+            direction: ltr;
+        }
+
+        .prompt-symbol {
+            color: #38bdf8;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .terminal-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #f8fafc;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .scan-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #0284c7, #2563eb);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: opacity 0.2s;
+        }
+
+        .scan-btn:active {
+            opacity: 0.85;
+        }
+
+        /* ۳. مهارت‌ها */
+        .skill-item {
+            margin-bottom: 14px;
+        }
+        .skill-item:last-child {
+            margin-bottom: 0;
+        }
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+        .bar-bg {
+            background: #1e293b;
+            height: 7px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        /* ۴. پروژه‌ها */
+        .project-item {
+            background: #0b1120;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+        .project-item:last-child {
+            margin-bottom: 0;
+        }
+        .project-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .project-desc {
+            font-size: 12.5px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* ۵. دکمه‌های ارتباط سریع */
         .social-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-bottom: 16px;
         }
 
         .social-btn {
@@ -134,7 +273,7 @@
             border: 1px solid #334155;
         }
 
-        /* فرم تماس */
+        /* ۶. فرم دریافت شماره */
         .form-input {
             width: 100%;
             background: #030712;
@@ -178,7 +317,7 @@
             text-align: center;
             font-size: 12px;
             color: #64748b;
-            margin-top: 20px;
+            margin-top: 24px;
             font-family: monospace;
         }
     </style>
@@ -187,63 +326,170 @@
 
 <div class="container">
 
-    <!-- کارت مشخصات -->
-    <div class="card" style="text-align: center;">
+    <!-- بخش ۱: کارت پروفایل اصلی -->
+    <div class="card profile-card">
         <div class="badge">
             <span class="dot"></span>
-            وضعیت: آماده همکاری
+            وضعیت: سیستم فعال و آنلاین
         </div>
         <h1 class="name">ابوالفضل اصلانی</h1>
-        <div class="role">&gt; Python Developer & Cyber Security Enthusiast</div>
+        <div class="role">&gt; Python Developer & Cyber Security Analyst</div>
         <p class="bio">
-            توسعه‌دهنده اسکریپت‌های کاربردی پایتون، علاقه‌مند به مباحث تست نفوذ و تحلیل امنیتی. برای ارتباط مستقیم از گزینه‌های زیر استفاده کنید.
+            توسعه‌دهنده اسکریپت‌های پایتون، خودکارسازی ابزارهای سیستمی و تحلیل آسیب‌پذیری‌های امنیتی شبکه.
         </p>
     </div>
 
-    <!-- بخش ارتباط سریع با شبکه‌ها -->
+    <!-- بخش ۲: کنسول هکری تعاملی -->
+    <div class="card">
+        <div class="card-title">💻 ترمینال تعاملی سیستم (Interactive Console)</div>
+        <div class="terminal">
+            <div class="terminal-header">
+                <span class="t-dot t-red"></span>
+                <span class="t-dot t-yellow"></span>
+                <span class="t-dot t-green"></span>
+                <span style="color:#64748b; font-size:11px; margin-left: 8px;">bash - abolfazl@security-core</span>
+            </div>
+            <div class="terminal-body" id="termOutput">
+                <div>[+] Terminal ready...</div>
+                <div>[+] Type 'help' to see list of commands.</div>
+            </div>
+            <div class="terminal-input-row">
+                <span class="prompt-symbol">$</span>
+                <input type="text" id="termInput" class="terminal-input" placeholder="دستور را وارد کنید (مثال: help)..." autocomplete="off">
+            </div>
+        </div>
+
+        <button class="scan-btn" onclick="runScanner()">⚡ اجرای اسکن زنده امنیت شبکه</button>
+    </div>
+
+    <!-- بخش ۳: تخصص‌ها و مهارت‌ها -->
+    <div class="card">
+        <div class="card-title">🛡️ تخصص‌ها و مهارت‌های فنی</div>
+
+        <div class="skill-item">
+            <div class="skill-header">
+                <span>توسعه و برنامه‌نویسی پایتون (Python)</span>
+                <span style="color:#10b981;">90%</span>
+            </div>
+            <div class="bar-bg"><div class="bar-fill" style="width: 90%; background: #10b981;"></div></div>
+        </div>
+
+        <div class="skill-item">
+            <div class="skill-header">
+                <span>امنیت شبکه و تست نفوذ (Pen-Testing)</span>
+                <span style="color:#38bdf8;">80%</span>
+            </div>
+            <div class="bar-bg"><div class="bar-fill" style="width: 80%; background: #38bdf8;"></div></div>
+        </div>
+
+        <div class="skill-item">
+            <div class="skill-header">
+                <span>لینوکس، سرور و شل اسکریپت (Linux Shell)</span>
+                <span style="color:#a855f7;">75%</span>
+            </div>
+            <div class="bar-bg"><div class="bar-fill" style="width: 75%; background: #a855f7;"></div></div>
+        </div>
+    </div>
+
+    <!-- بخش ۴: نمونه کارها و پروژه‌ها -->
+    <div class="card">
+        <div class="card-title">📂 پروژه‌ها و ابزارهای توسعه‌یافته</div>
+
+        <div class="project-item">
+            <div class="project-title">⚡ ابزار اسکنر پورت‌ها (Python Port Scanner)</div>
+            <div class="project-desc">اسکریپت سریع پایتون جهت بررسی پورت‌های باز سرور و ارزیابی فایروال شبکه.</div>
+        </div>
+
+        <div class="project-item">
+            <div class="project-title">🤖 وب سرور و اتوماسیون (Automated Server)</div>
+            <div class="project-desc">پیاده‌سازی سرویس‌دهنده‌های سبک مبتنی بر سوکت و پردازش اطلاعات کاربران.</div>
+        </div>
+    </div>
+
+    <!-- بخش ۵: ارتباط مستقیم با پیام‌رسان‌ها -->
     <div class="card">
         <div class="card-title">💬 ارتباط مستقیم و پیام‌رسان‌ها</div>
         <div class="social-grid">
-            <!-- لینک تلگرام -->
             <a href="https://t.me/" target="_blank" class="social-btn btn-tg">
-                ✈️ پیام در تلگرام
+                ✈️ تلگرام
             </a>
-
-            <!-- لینک واتساپ -->
             <a href="https://wa.me/" target="_blank" class="social-btn btn-wa">
-                💬 پیام در واتساپ
+                💬 واتساپ
             </a>
-
-            <!-- تماس تلفنی -->
             <a href="tel:" class="social-btn btn-call">
-                📞 تماس تلفنی فوری
+                📞 تماس تلفنی مستقیم
             </a>
         </div>
     </div>
 
-    <!-- فرم درخواست تماس -->
+    <!-- بخش ۶: فرم دریافت اطلاعات و شماره -->
     <div class="card" style="border-color: #10b981;">
-        <div class="card-title">📝 فرم ثبت درخواست مشاوره / پروژه</div>
+        <div class="card-title">📝 ثبت درخواست مشاوره / همکاری</div>
 
         <form id="leadForm" onsubmit="handleForm(event)">
-            <input type="text" id="custName" class="form-input" placeholder="نام و نام خانوادگی" required>
-            <input type="tel" id="custPhone" class="form-input" placeholder="شماره موبایل (09xxxxxxxxx)" dir="ltr" style="text-align: right;" required>
-            <button type="submit" class="submit-btn">ارسال شماره برای تماس</button>
+            <input type="text" id="custName" class="form-input" placeholder="نام و نام خانوادگی شما" required>
+            <input type="tel" id="custPhone" class="form-input" placeholder="شماره موبایل (مثال: 09120000000)" dir="ltr" style="text-align: right;" required>
+            <button type="submit" class="submit-btn">ارسال شماره تماس</button>
         </form>
 
         <div id="successMessage">
-            <strong>✔ پیام شما ثبت شد!</strong><br>
-            به‌زودی با شماره شما تماس گرفته خواهد شد.
+            <strong>✔ اطلاعات با موفقیت ثبت شد!</strong><br>
+            به‌زودی جهت پیگیری و مشاوره با شما تماس گرفته می‌شود.
         </div>
     </div>
 
     <footer>
-        ABOLFAZL ASLANI &copy; 2026
+        [ SYSTEM ONLINE ] &bull; ABOLFAZL ASLANI &copy; 2026
     </footer>
 
 </div>
 
 <script>
+    // هندلینگ ترمینال
+    const termInput = document.getElementById('termInput');
+    const termOutput = document.getElementById('termOutput');
+
+    termInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const cmd = termInput.value.trim().toLowerCase();
+            termInput.value = '';
+            
+            appendOutput('$ ' + cmd);
+
+            if (cmd === 'help') {
+                appendOutput('دستورات: help, skills, projects, whoami, clear');
+            } else if (cmd === 'skills') {
+                appendOutput('تخصص‌ها: Python, Linux, Network Security, Automation');
+            } else if (cmd === 'projects') {
+                appendOutput('پروژه‌ها: Port Scanner, Network Monitor, Auto Bot');
+            } else if (cmd === 'whoami') {
+                appendOutput('ابوالفضل اصلانی - متخصص پایتون و امنیت');
+            } else if (cmd === 'clear') {
+                termOutput.innerHTML = '';
+            } else if (cmd === '') {
+                // Empty
+            } else {
+                appendOutput('دستور نامعتبر است: ' + cmd + ' (help را تایپ کنید)');
+            }
+        }
+    });
+
+    function appendOutput(text) {
+        const line = document.createElement('div');
+        line.textContent = text;
+        termOutput.appendChild(line);
+        termOutput.scrollTop = termOutput.scrollHeight;
+    }
+
+    // دکمه اسکن زنده
+    function runScanner() {
+        appendOutput('>>> آغاز اسکن خودکار شبکه...');
+        setTimeout(() => appendOutput('[*] پورت‌های ۸۰ و ۴۴۳ در حال بررسی... فعال'), 500);
+        setTimeout(() => appendOutput('[*] تست دیوار آتش (Firewall)... بدون نفوذ'), 1100);
+        setTimeout(() => appendOutput('[✓] وضعیت سیستم امن است: 100% OK'), 1700);
+    }
+
+    // فرم ثبت نام و شماره
     function handleForm(e) {
         e.preventDefault();
         const name = document.getElementById('custName').value;
