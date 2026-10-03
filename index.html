@@ -3,159 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ابوالفضل اصلانی | پایتون و امنیت شبکه</title>
+    <title>ابوالفضل اصلانی | پایتون و امنیت سایبری</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Tahoma, sans-serif;
         }
 
         body {
-            background-color: #0b0f19;
+            background-color: #080c14;
             color: #e2e8f0;
             min-height: 100vh;
-            padding: 20px 16px 50px;
+            padding: 20px 14px 60px;
             display: flex;
             justify-content: center;
         }
 
         .container {
             width: 100%;
-            max-width: 550px;
+            max-width: 580px;
         }
 
-        /* کارت بالای صفحه */
-        .profile-card {
-            background: #111827;
-            border: 1px solid #1f2937;
+        .card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
             border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            padding: 22px;
             margin-bottom: 20px;
-            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
 
-        .status-badge {
+        .badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(16, 185, 129, 0.1);
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.12);
             color: #10b981;
             border: 1px solid rgba(16, 185, 129, 0.3);
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-weight: 700;
+            margin-bottom: 14px;
         }
 
-        .status-dot {
+        .dot {
             width: 8px;
             height: 8px;
             background: #10b981;
             border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
         }
 
         .name {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 6px;
+            color: #f8fafc;
+            margin-bottom: 4px;
         }
 
-        .title {
+        .role {
             font-size: 14px;
             color: #38bdf8;
+            font-family: monospace;
             margin-bottom: 12px;
+            direction: ltr;
+            text-align: right;
         }
 
         .bio {
-            font-size: 13px;
+            font-size: 13.5px;
             color: #94a3b8;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
-        /* بخش مهارت‌ها */
-        .skills-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .card-heading {
+        .card-title {
             font-size: 15px;
             font-weight: 700;
-            color: #f8fafc;
+            color: #f1f5f9;
             margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .skill-row {
-            margin-bottom: 14px;
+        /* دکمه‌های پیام‌رسان‌ها و ارتباط مستقیم */
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
-        .skill-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .skill-info {
+        .social-btn {
             display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            margin-bottom: 6px;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 700;
+            transition: transform 0.15s, opacity 0.2s;
         }
 
-        .skill-bar {
-            width: 100%;
-            height: 8px;
+        .social-btn:active {
+            transform: scale(0.97);
+            opacity: 0.9;
+        }
+
+        .btn-tg {
+            background: #0284c7;
+            color: #ffffff;
+            border: 1px solid #38bdf8;
+        }
+
+        .btn-wa {
+            background: #15803d;
+            color: #ffffff;
+            border: 1px solid #22c55e;
+        }
+
+        .btn-call {
+            grid-column: span 2;
             background: #1e293b;
-            border-radius: 10px;
-            overflow: hidden;
+            color: #38bdf8;
+            border: 1px solid #334155;
         }
 
-        .skill-progress {
-            height: 100%;
-            background: #10b981;
-            border-radius: 10px;
-        }
-
-        /* فرم تماس شیک */
-        .contact-card {
-            background: #111827;
-            border: 1px solid #10b981;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
-        }
-
-        .form-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #f1f5f9;
-        }
-
+        /* فرم تماس */
         .form-input {
             width: 100%;
-            background: #0b0f19;
+            background: #030712;
             border: 1px solid #334155;
             border-radius: 10px;
             padding: 12px 14px;
-            color: #ffffff;
+            color: #fff;
             font-size: 14px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             outline: none;
-            transition: border-color 0.2s;
         }
-
         .form-input:focus {
             border-color: #10b981;
         }
@@ -163,27 +153,21 @@
         .submit-btn {
             width: 100%;
             background: #10b981;
-            color: #0b0f19;
+            color: #030712;
             border: none;
             border-radius: 10px;
             padding: 13px;
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 14.5px;
+            font-weight: 800;
             cursor: pointer;
-            transition: opacity 0.2s;
         }
 
-        .submit-btn:active {
-            opacity: 0.85;
-        }
-
-        /* پیام تشکر بعد ارسال */
         #successMessage {
             display: none;
-            background: rgba(16, 185, 129, 0.12);
+            background: rgba(16, 185, 129, 0.15);
             border: 1px solid #10b981;
-            border-radius: 12px;
-            padding: 18px;
+            border-radius: 10px;
+            padding: 16px;
             text-align: center;
             color: #10b981;
             font-size: 14px;
@@ -194,7 +178,8 @@
             text-align: center;
             font-size: 12px;
             color: #64748b;
-            margin-top: 24px;
+            margin-top: 20px;
+            font-family: monospace;
         }
     </style>
 </head>
@@ -202,90 +187,71 @@
 
 <div class="container">
 
-    <!-- کارت معرفی کاربر -->
-    <div class="profile-card">
-        <div class="status-badge">
-            <span class="status-dot"></span>
-            سیستم آنلاین و فعال
+    <!-- کارت مشخصات -->
+    <div class="card" style="text-align: center;">
+        <div class="badge">
+            <span class="dot"></span>
+            وضعیت: آماده همکاری
         </div>
         <h1 class="name">ابوالفضل اصلانی</h1>
-        <div class="title">برنامه‌نویس پایتون | امنیت شبکه</div>
+        <div class="role">&gt; Python Developer & Cyber Security Enthusiast</div>
         <p class="bio">
-            علاقه‌مند به توسعه ابزارهای خودکارسازی، شبیه‌سازی تست نفوذ و تحلیل امنیتی با استفاده از زبان پایتون و لینوکس.
+            توسعه‌دهنده اسکریپت‌های کاربردی پایتون، علاقه‌مند به مباحث تست نفوذ و تحلیل امنیتی. برای ارتباط مستقیم از گزینه‌های زیر استفاده کنید.
         </p>
     </div>
 
-    <!-- بخش مهارت‌ها -->
-    <div class="skills-card">
-        <div class="card-heading">مهارت‌های اصلی</div>
+    <!-- بخش ارتباط سریع با شبکه‌ها -->
+    <div class="card">
+        <div class="card-title">💬 ارتباط مستقیم و پیام‌رسان‌ها</div>
+        <div class="social-grid">
+            <!-- لینک تلگرام -->
+            <a href="https://t.me/" target="_blank" class="social-btn btn-tg">
+                ✈️ پیام در تلگرام
+            </a>
 
-        <div class="skill-row">
-            <div class="skill-info">
-                <span>برنامه‌نویسی پایتون (Python)</span>
-                <span style="color:#10b981;">85%</span>
-            </div>
-            <div class="skill-bar">
-                <div class="skill-progress" style="width: 85%;"></div>
-            </div>
-        </div>
+            <!-- لینک واتساپ -->
+            <a href="https://wa.me/" target="_blank" class="social-btn btn-wa">
+                💬 پیام در واتساپ
+            </a>
 
-        <div class="skill-row">
-            <div class="skill-info">
-                <span>مفاهیم امنیت و شبکه (Network & Security)</span>
-                <span style="color:#38bdf8;">75%</span>
-            </div>
-            <div class="skill-bar">
-                <div class="skill-progress" style="width: 75%; background: #38bdf8;"></div>
-            </div>
-        </div>
-
-        <div class="skill-row">
-            <div class="skill-info">
-                <span>ترمینال و لینوکس (Linux Shell)</span>
-                <span style="color:#10b981;">70%</span>
-            </div>
-            <div class="skill-bar">
-                <div class="skill-progress" style="width: 70%;"></div>
-            </div>
+            <!-- تماس تلفنی -->
+            <a href="tel:" class="social-btn btn-call">
+                📞 تماس تلفنی فوری
+            </a>
         </div>
     </div>
 
-    <!-- فرم درخواست ارتباط و شماره -->
-    <div class="contact-card">
-        <div class="card-heading">فرم درخواست تماس و مشاوره</div>
+    <!-- فرم درخواست تماس -->
+    <div class="card" style="border-color: #10b981;">
+        <div class="card-title">📝 فرم ثبت درخواست مشاوره / پروژه</div>
 
-        <form id="leadForm" onsubmit="saveData(event)">
-            <label class="form-label">نام و نام خانوادگی:</label>
-            <input type="text" id="custName" class="form-input" placeholder="مثال: علی رضایی" required>
-
-            <label class="form-label">شماره موبایل:</label>
-            <input type="tel" id="custPhone" class="form-input" placeholder="09xxxxxxxxx" dir="ltr" style="text-align: right;" required>
-
-            <button type="submit" class="submit-btn">ثبت درخواست تماس</button>
+        <form id="leadForm" onsubmit="handleForm(event)">
+            <input type="text" id="custName" class="form-input" placeholder="نام و نام خانوادگی" required>
+            <input type="tel" id="custPhone" class="form-input" placeholder="شماره موبایل (09xxxxxxxxx)" dir="ltr" style="text-align: right;" required>
+            <button type="submit" class="submit-btn">ارسال شماره برای تماس</button>
         </form>
 
         <div id="successMessage">
-            <strong>✔ اطلاعات با موفقیت ارسال شد.</strong><br>
-            به زودی با شماره ثبت‌شده تماس گرفته خواهد شد.
+            <strong>✔ پیام شما ثبت شد!</strong><br>
+            به‌زودی با شماره شما تماس گرفته خواهد شد.
         </div>
     </div>
 
     <footer>
-        توسعه داده شده توسط ابوالفضل اصلانی &copy;
+        ABOLFAZL ASLANI &copy; 2026
     </footer>
 
 </div>
 
 <script>
-    function saveData(event) {
-        event.preventDefault();
-        
-        var name = document.getElementById("custName").value;
-        var phone = document.getElementById("custPhone").value;
+    function handleForm(e) {
+        e.preventDefault();
+        const name = document.getElementById('custName').value;
+        const phone = document.getElementById('custPhone').value;
 
         if (name && phone) {
-            document.getElementById("leadForm").style.display = "none";
-            document.getElementById("successMessage").style.display = "block";
+            document.getElementById('leadForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
         }
     }
 </script>
