@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abolfazl | Terminal Interface</title>
+    <title>پورتفولیو ابوالفضل</title>
+    
+    <!-- لود فونت تمیز فارسی از گوگل -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap">
+
     <style>
         * {
             box-sizing: border-box;
@@ -14,79 +18,72 @@
         body {
             background-color: #050505;
             color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Vazirmatn', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* استایل منوی ناوبری */
+        /* نوار منو */
         nav {
             width: 100%;
             background-color: #0d0d0d;
             border-bottom: 2px solid #00ff00;
-            padding: 15px 0;
+            padding: 14px 0;
             position: sticky;
             top: 0;
-            z-index: 100;
         }
 
-        .nav-container {
-            max-width: 800px;
+        .nav-links {
+            max-width: 600px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+            justify-content: center;
+            gap: 15px;
         }
 
-        .nav-link {
+        .nav-links a {
             color: #00ff00;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 14px;
             padding: 6px 14px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            border: 1px solid #00ff00;
-            background-color: rgba(0, 255, 0, 0.15);
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
-        }
-
-        /* کارت اصلی محتوا */
-        .container {
-            width: 90%;
-            max-width: 500px;
-            margin: 30px auto;
             border: 1px solid #00ff00;
             border-radius: 6px;
-            background-color: #0a0a0a;
+        }
+
+        .nav-links a:hover {
+            background-color: #00ff00;
+            color: #000000;
+        }
+
+        /* کادر اصلی */
+        .card {
+            width: 90%;
+            max-width: 450px;
+            margin-top: 35px;
             padding: 25px;
+            background-color: #0c0c0c;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
             text-align: center;
         }
 
         h1 {
-            font-size: 22px;
+            font-size: 20px;
             margin-bottom: 15px;
-            text-shadow: 0 0 8px #00ff00;
         }
 
-        p {
-            font-size: 14px;
-            line-height: 1.6;
-            margin: 8px 0;
-            color: #aaffaa;
+        .info-row {
+            margin: 10px 0;
+            font-size: 15px;
+            color: #c9ffc9;
         }
 
-        hr {
-            border: 0;
+        .separator {
+            border: none;
             border-top: 1px dashed #00ff00;
             margin: 20px 0;
         }
@@ -94,52 +91,46 @@
         button {
             background-color: transparent;
             color: #00ff00;
-            border: 1px solid #00ff00;
-            padding: 10px 20px;
+            border: 2px solid #00ff00;
+            border-radius: 6px;
+            padding: 10px 24px;
+            font-size: 15px;
             font-family: inherit;
-            font-size: 14px;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
-            border-radius: 4px;
-            margin-top: 15px;
-            transition: all 0.2s ease;
+            margin-top: 10px;
         }
 
-        button:hover {
+        button:active {
             background-color: #00ff00;
-            color: #000;
-            box-shadow: 0 0 12px #00ff00;
+            color: #000000;
         }
     </style>
 </head>
 <body>
 
-    <!-- منوی سایت -->
+    <!-- بخش منو -->
     <nav>
-        <div class="nav-container">
-            <a href="#home" class="nav-link active">[ Home ]</a>
-            <a href="#skills" class="nav-link">[ Skills ]</a>
-            <a href="#projects" class="nav-link">[ Projects ]</a>
-            <a href="#contact" class="nav-link">[ Contact ]</a>
+        <div class="nav-links">
+            <a href="#home">خانه</a>
+            <a href="#skills">مهارت‌ها</a>
+            <a href="#projects">پروژه‌ها</a>
+            <a href="#contact">تماس</a>
         </div>
     </nav>
 
-    <!-- کارت وضعیت و مشخصات -->
-    <div class="container" id="home">
-        <h1>> SYSTEM ONLINE</h1>
-        <p><strong>Operator:</strong> Abolfazl</p>
-        <p><strong>Focus:</strong> Python Development & Cybersecurity</p>
-        <p><strong>Access Level:</strong> Root Administrator</p>
+    <!-- کادر مشخصات -->
+    <div class="card" id="home">
+        <h1>> وضعیت سیستم: آنلاین</h1>
+        
+        <div class="info-row"><strong>نام کاربر:</strong> ابوالفضل</div>
+        <div class="info-row"><strong>تخصص:</strong> پایتون و امنیت شبکه</div>
+        <div class="info-row"><strong>سطح دسترسی:</strong> ادمین اصلی</div>
 
-        <hr>
+        <hr class="separator">
 
-        <h3 style="margin-bottom: 10px;">> System Diagnostics</h3>
-        <p>Core: Python 3.x</p>
-        <p>Protocol: Secure / HTTPS</p>
-        <p>Status: All Systems Operational</p>
-
-        <button onclick="alert('Scanning network... Status: 100% Secure')">
-            INITIATE SCAN
+        <button onclick="alert('اسکن امنیتی با موفقیت انجام شد.')">
+            اجرای اسکن
         </button>
     </div>
 
