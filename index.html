@@ -3,234 +3,603 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ابوالفضل | ترمینال امنیتی</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap">
+    <title>ابوالفضل اصلانی | کارشناس امنیت و پایتون</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&display=swap">
     <style>
+        :root {
+            --bg-base: #06090e;
+            --card-bg: rgba(13, 20, 31, 0.75);
+            --border-glow: #00ff88;
+            --neon-blue: #00e5ff;
+            --neon-red: #ff3366;
+            --text-main: #e2f1f8;
+            --text-muted: #7e9bb0;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #050505;
-            color: #00ff66;
-            font-family: 'Vazirmatn', monospace, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Vazirmatn', sans-serif;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 20px;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* نوار بالای سایت */
-        nav {
-            width: 100%;
-            background-color: #0d0d0d;
-            border-bottom: 2px solid #00ff66;
-            padding: 12px 0;
-            position: sticky;
+        /* پس‌زمینه زنده شبکه‌ای */
+        #matrixCanvas {
+            position: fixed;
             top: 0;
-            z-index: 10;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.18;
+            pointer-events: none;
         }
 
-        .nav-links {
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 50px;
+        }
+
+        /* ناوبری شیشه‌ای */
+        header {
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            margin-bottom: 25px;
+        }
+
+        nav {
+            background: rgba(10, 16, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 14px;
+            padding: 12px 18px;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 900;
+            color: var(--border-glow);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
-            padding: 0 10px;
         }
 
-        .nav-btn {
-            background: transparent;
-            color: #00ff66;
-            border: 1px solid #00ff66;
-            border-radius: 6px;
-            padding: 6px 14px;
-            font-family: inherit;
+        .pulse-dot {
+            width: 9px;
+            height: 9px;
+            background: var(--border-glow);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--border-glow);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-items a {
+            color: var(--text-muted);
+            text-decoration: none;
             font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
 
-        .nav-btn:active {
-            background: #00ff66;
-            color: #000;
+        .nav-items a:hover {
+            color: var(--border-glow);
+            background: rgba(0, 255, 136, 0.08);
         }
 
-        /* پنجره شبیه‌ساز ترمینال */
-        .terminal-window {
-            width: 92%;
-            max-width: 550px;
-            margin-top: 25px;
-            background-color: #0c0c0c;
-            border: 2px solid #00ff66;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 255, 102, 0.25);
+        /* کارت بخش Hero و معرفی */
+        .hero-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
             overflow: hidden;
         }
 
-        .terminal-header {
-            background-color: #161616;
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid #222;
-            direction: ltr;
-        }
-
-        .circle {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+        .hero-badge {
             display: inline-block;
-        }
-        .red { background: #ff5f56; }
-        .yellow { background: #ffbd2e; }
-        .green { background: #27c93f; }
-
-        .terminal-body {
-            padding: 18px;
-            min-height: 280px;
-            max-height: 400px;
-            overflow-y: auto;
-            text-align: right;
-            font-size: 14px;
-            line-height: 1.8;
+            background: rgba(0, 255, 136, 0.12);
+            color: var(--border-glow);
+            border: 1px solid var(--border-glow);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 12px;
         }
 
-        .log-entry {
+        .hero-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
             margin-bottom: 8px;
         }
 
-        .cmd-text {
-            color: #fff;
-            direction: ltr;
-            text-align: left;
-            display: block;
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+            max-width: 650px;
         }
 
-        /* بخش ورودی دستور */
-        .input-bar {
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--neon-blue);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* بخش مهارت‌ها */
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 28px 0 16px;
+            color: #fff;
             display: flex;
             align-items: center;
-            padding: 10px 15px;
-            background-color: #111;
-            border-top: 1px solid #00ff66;
             gap: 8px;
         }
 
-        .prompt {
-            color: #00ff66;
-            font-weight: bold;
+        .section-title::before {
+            content: "//";
+            color: var(--border-glow);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .skill-item {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 14px 18px;
+        }
+
+        .skill-head {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .skill-bar-bg {
+            background: rgba(255, 255, 255, 0.08);
+            height: 7px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--border-glow));
+        }
+
+        /* پروژه‌ها */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 229, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--neon-blue);
+        }
+
+        .project-tag {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--neon-blue);
+            background: rgba(0, 229, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .project-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .project-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ترمینال تعاملی */
+        .terminal-box {
+            background: #05080c;
+            border: 1px solid var(--border-glow);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.2);
+            margin-top: 14px;
+        }
+
+        .term-header {
+            background: #0d131a;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             direction: ltr;
         }
 
-        input {
+        .term-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .term-body {
+            padding: 14px;
+            min-height: 220px;
+            max-height: 320px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.7;
+            text-align: right;
+        }
+
+        .term-line {
+            margin-bottom: 6px;
+        }
+
+        .term-quick-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px 12px;
+            background: #090e14;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .quick-btn {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--border-glow);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .quick-btn:active {
+            background: var(--border-glow);
+            color: #000;
+        }
+
+        .term-input-row {
+            display: flex;
+            padding: 10px 14px;
+            background: #070b10;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            gap: 8px;
+            align-items: center;
+        }
+
+        .term-input-row input {
             flex: 1;
             background: transparent;
             border: none;
             outline: none;
             color: #fff;
-            font-family: inherit;
-            font-size: 15px;
+            font-family: monospace;
+            font-size: 14px;
             direction: ltr;
         }
 
-        .send-btn {
-            background: #00ff66;
+        .run-btn {
+            background: var(--border-glow);
             color: #000;
             border: none;
-            border-radius: 4px;
-            padding: 5px 12px;
-            font-weight: bold;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 12px;
             cursor: pointer;
             font-family: inherit;
+        }
+
+        /* فوتر */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- دکمه‌های ناوبری سریع -->
-    <nav>
-        <div class="nav-links">
-            <button class="nav-btn" onclick="runCmd('about')">درباره من</button>
-            <button class="nav-btn" onclick="runCmd('skills')">مهارت‌ها</button>
-            <button class="nav-btn" onclick="runCmd('scan')">اسکن امنیتی</button>
-            <button class="nav-btn" onclick="runCmd('clear')">پاکسازی</button>
-        </div>
-    </nav>
+    <canvas id="matrixCanvas"></canvas>
 
-    <!-- ترمینال شبیه‌ساز -->
-    <div class="terminal-window">
-        <div class="terminal-header">
-            <span class="circle red"></span>
-            <span class="circle yellow"></span>
-            <span class="circle green"></span>
-            <span style="color:#777; font-size: 12px; margin-left: 5px;">bash — root@abolfazl:~</span>
+    <div class="wrapper">
+        <!-- ناوبری -->
+        <header>
+            <nav>
+                <div class="brand-title">
+                    <span class="pulse-dot"></span>
+                    ابوالفضل اصلانی
+                </div>
+                <div class="nav-items">
+                    <a href="#about">درباره</a>
+                    <a href="#skills">مهارت‌ها</a>
+                    <a href="#projects">پروژه‌ها</a>
+                    <a href="#terminal">کنسول</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- معرفی اصلی -->
+        <section class="hero-card" id="about">
+            <span class="hero-badge">توسعه‌دهنده پایتون و علاقه‌مند به امنیت شبکه</span>
+            <h1 class="hero-title">توسعه ابزارهای هوشمند و پایش امنیت سایبری</h1>
+            <p class="hero-desc">
+                من ابوالفضل هستم؛ تمرکز من روی یادگیری عمیق معماری شبکه‌ها، اسکریپت‌نویسی پیشرفته با زبان پایتون، خودکارسازی تسک‌های تست نفوذ و تحلیل امنیتی داده‌هاست.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-val">Python 3</div>
+                    <div class="stat-label">هسته توسعه</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val">Linux / Bash</div>
+                    <div class="stat-label">محیط اصلی</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val">SecOps</div>
+                    <div class="stat-label">حوزه تمرکز</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- مهارت‌ها -->
+        <h2 class="section-title" id="skills">سطح مهارت‌های فنی</h2>
+        <div class="skills-container">
+            <div class="skill-item">
+                <div class="skill-head">
+                    <span>برنامه‌نویسی و اسکریپت‌نویسی پایتون (Python Automation)</span>
+                    <span style="color: var(--neon-blue);">85%</span>
+                </div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-head">
+                    <span>مفاهیم امنیت شبکه و پکت آنالیزینگ (Network Analysis)</span>
+                    <span style="color: var(--neon-blue);">70%</span>
+                </div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 70%;"></div></div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-head">
+                    <span>ترمینال لینوکس و شل اسکریپت (Linux Shell)</span>
+                    <span style="color: var(--neon-blue);">75%</span>
+                </div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+            </div>
         </div>
 
-        <div class="terminal-body" id="console">
-            <div class="log-entry">> در حال اتصال به هسته امنیتی...</div>
-            <div class="log-entry">> سیستم فعال شد. اپراتور: ابوالفضل</div>
-            <div class="log-entry" style="color: #88ff88;">> راهنما: برای مشاهده دستورات، کلمه <b>help</b> را بنویسید یا دکمه‌های بالا را لمس کنید.</div>
+        <!-- پروژه‌ها -->
+        <h2 class="section-title" id="projects">ابزارهای در حال توسعه</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <span class="project-tag">Python Socket</span>
+                <div class="project-name">اسکنر چندنخی پورت‌ها (Fast Scanner)</div>
+                <div class="project-text">ابزار مبتنی بر سوکت‌های پایتون برای بررسی پورت‌های باز سرورها با سرعت بالا و گزارش‌گیری زمان‌واقعی.</div>
+            </div>
+
+            <div class="project-card">
+                <span class="project-tag">Cyber Automation</span>
+                <div class="project-name">تحلیل‌گر لاگ امنیتی (Log Auditor)</div>
+                <div class="project-text">اسکریپت پایش ترافیک مشکوک و تلاش‌های غیرمجاز جهت شناسایی سریع حملات بروت‌فورس.</div>
+            </div>
+
+            <div class="project-card">
+                <span class="project-tag">API & Tools</span>
+                <div class="project-name">بات هوشمند دستیار ادمین</div>
+                <div class="project-text">دستیار اتوماتیک پایتونی جهت ارسال هشدارهای فوری از وضعیت سرور و دسترسی‌ها.</div>
+            </div>
         </div>
 
-        <div class="input-bar">
-            <span class="prompt">root@os:~#</span>
-            <input type="text" id="userInput" placeholder="help, skills, scan..." autocomplete="off">
-            <button class="send-btn" onclick="handleInput()">ارسال</button>
+        <!-- ترمینال شبیه‌ساز -->
+        <h2 class="section-title" id="terminal">کنسول شبیه‌ساز امنیتی</h2>
+        <div class="terminal-box">
+            <div class="term-header">
+                <div class="term-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                </div>
+                <span style="color: #64748b; font-size: 11px;">session: abolfazl@gateway:~$</span>
+            </div>
+
+            <div class="term-body" id="termOutput">
+                <div class="term-line" style="color: #00ff88;">[✓] پروتکل رمزنگاری فعال است. خوش آمدید.</div>
+                <div class="term-line" style="color: #94a3b8;">برای مشاهده اطلاعات بیشتر، دکمه‌های زیر را لمس کرده یا دستور را تایپ کنید.</div>
+            </div>
+
+            <div class="term-quick-btns">
+                <button class="quick-btn" onclick="execCmd('whoami')">دستور whoami</button>
+                <button class="quick-btn" onclick="execCmd('scan')">اسکن درگاه‌ها</button>
+                <button class="quick-btn" onclick="execCmd('status')">وضعیت هسته</button>
+                <button class="quick-btn" onclick="execCmd('clear')">پاکسازی</button>
+            </div>
+
+            <div class="term-input-row">
+                <span style="color: var(--border-glow); font-family: monospace; font-size: 13px;">#</span>
+                <input type="text" id="termInput" placeholder="دستور (مثل: whoami, scan, status)..." autocomplete="off">
+                <button class="run-btn" onclick="handleInput()">ارسال</button>
+            </div>
         </div>
+
+        <footer>
+            طراحی و توسعه اختصاصی | ابوالفضل اصلانی &copy; 2026
+        </footer>
     </div>
 
     <script>
-        const consoleBox = document.getElementById('console');
-        const inputField = document.getElementById('userInput');
+        // ماتریکس سبک در پس‌زمینه
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
 
-        inputField.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                handleInput();
-            }
+        const letters = '01ABOLFAZL_SEC_PYTHON_';
+        const fontSize = 14;
+        let cols = Math.floor(canvas.width / fontSize);
+        let ypos = Array(cols).fill(0);
+
+        function matrix() {
+            ctx.fillStyle = 'rgba(6, 9, 14, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff88';
+            ctx.font = fontSize + 'px monospace';
+
+            ypos.forEach((y, ind) => {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                const x = ind * fontSize;
+                ctx.fillText(text, x, y);
+                if (y > canvas.height + Math.random() * 10000) ypos[ind] = 0;
+                else ypos[ind] = y + fontSize;
+            });
+        }
+        setInterval(matrix, 45);
+
+        // ترمینال
+        const termOutput = document.getElementById('termOutput');
+        const termInput = document.getElementById('termInput');
+
+        termInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') handleInput();
         });
 
         function handleInput() {
-            const cmd = inputField.value.trim().toLowerCase();
-            if (cmd) {
-                runCmd(cmd);
-                inputField.value = '';
+            const val = termInput.value.trim().toLowerCase();
+            if (val) {
+                execCmd(val);
+                termInput.value = '';
             }
         }
 
-        function runCmd(command) {
-            printLog('<span class="cmd-text">> ' + command + '</span>');
+        function execCmd(cmd) {
+            appendLog('<span style="color:#fff; direction:ltr; display:block; text-align:left;">> ' + cmd + '</span>');
 
-            if (command === 'help') {
-                printLog('دستورات مجاز:<br>- <b>about</b>: درباره من<br>- <b>skills</b>: لیست مهارت‌ها<br>- <b>scan</b>: اسکن پورت و سرور<br>- <b>clear</b>: پاکسازی ترمینال');
-            } else if (command === 'about') {
-                printLog('نام: ابوالفضل<br>علاقه‌مندی: برنامه‌نویسی پایتون و امنیت سایبری<br>سطح دسترسی: ادمین کل سیستم');
-            } else if (command === 'skills') {
-                printLog('مهارت‌ها:<br>• Python Scripting [████████░░] 80%<br>• Network Security [██████░░░░] 60%<br>• Linux Shell [███████░░░] 70%');
-            } else if (command === 'scan') {
-                printLog('در حال اسکن پورت‌ها...<br>Port 80: Secure<br>Port 443: Encrypted<br>نتیجه: وضعیت ۱۰۰٪ ایمن است.');
-            } else if (command === 'clear') {
-                consoleBox.innerHTML = '';
+            if (cmd === 'whoami') {
+                appendLog('کاربر: ابوالفضل | سطح: Root Administrator | سیستم‌عامل: SecLinux x86_64');
+            } else if (cmd === 'scan') {
+                appendLog('در حال اسکن سوکت‌های شبکه...<br>Port 22 [SSH]: Secure<br>Port 80/443 [Web]: Encrypted<br>نتیجه: سیستم در امنیت کامل قرار دارد.');
+            } else if (cmd === 'status') {
+                appendLog('وضعیت هسته: فعال (100% Operational)<br>پایتون: نسخه 3.12 آماده اجرای اسکریپت‌ها');
+            } else if (cmd === 'clear') {
+                termOutput.innerHTML = '';
             } else {
-                printLog('<span style="color: #ff5555;">خطا: دستور یافت نشد. بنویسید: help</span>');
+                appendLog('<span style="color:#ff3366;">دستور تعریف‌نشده. دستورات: whoami, scan, status, clear</span>');
             }
-
-            consoleBox.scrollTop = consoleBox.scrollHeight;
+            termOutput.scrollTop = termOutput.scrollHeight;
         }
 
-        function printLog(text) {
-            const div = document.createElement('div');
-            div.className = 'log-entry';
-            div.innerHTML = text;
-            consoleBox.appendChild(div);
-            consoleBox.scrollTop = consoleBox.scrollHeight;
+        function appendLog(html) {
+            const el = document.createElement('div');
+            el.className = 'term-line';
+            el.innerHTML = html;
+            termOutput.appendChild(el);
+            termOutput.scrollTop = termOutput.scrollHeight;
         }
     </script>
-
 </body>
 </html>
